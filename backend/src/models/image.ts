@@ -16,6 +16,10 @@ Image.init(
             autoIncrement: true,
             primaryKey: true,
         },
+        title: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
         photo: {
             type: DataTypes.STRING,
             allowNull: false,
