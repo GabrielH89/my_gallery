@@ -4,6 +4,7 @@ import { User } from "./user";
 
 class Image extends Model {
     public id_image!: number;
+    public title!: string; 
     public photo!: string;
     public description!: string;
     public userId!: number; 

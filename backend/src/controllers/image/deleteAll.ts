@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
 import httpStatus from '../../shared/httpStatus';
 import { Image } from '../../models/image';
-import upload from '../../middleware/multerConfig';
 import authAuthentication from '../../middleware/authAuthentication';
 import fs from 'fs';
 import path from 'path';
@@ -19,12 +18,18 @@ export const deleteAllByUser = async (req: Request, res: Response) => {
             }
 
             const uploadDirectory = path.resolve(__dirname, '../../../public/uploads');
-            const files = await fs.promises.readdir(uploadDirectory);
 
-            // Exclua fisicamente os arquivos
-            await Promise.all(files.map(async (file) => {
-                const filePath = path.join(uploadDirectory, file);
-                await fs.promises.unlink(filePath);
+            // Exclua fisicamente os arquivos associados ao usuário
+            await Promise.all(images.map(async (image) => {
+                const filePath = path.join(uploadDirectory, image.photo);
+                // Verifique se o arquivo existe antes de excluí-lo
+                if (fs.existsSync(filePath)) {
+                    try {
+                        await fs.promises.unlink(filePath);
+                    } catch (error) {
+                        console.error('Erro ao excluir arquivo:', error);
+                    }
+                }
             }));
 
             // Exclua as entradas das imagens no banco de dados
