@@ -1,5 +1,11 @@
 import multer from 'multer';
 import path from 'path';
+import fs from 'fs';
+import { Request, Response, NextFunction } from 'express';
+
+interface MulterFileWithBase64 extends Express.Multer.File {
+    base64Data?: string;
+}
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -10,7 +16,7 @@ const storage = multer.diskStorage({
     }
 });
 
-const fileFilter = (req: Express.Request, file: Express.Multer.File, cb: multer.FileFilterCallback) => {
+const fileFilter = (req: Request, file: Express.Multer.File, cb: multer.FileFilterCallback) => {
     const allowedMimeTypes = ['image/png', 'image/jpeg', 'image/jpg'];
     if (allowedMimeTypes.includes(file.mimetype)) {
         cb(null, true);
@@ -22,4 +28,3 @@ const fileFilter = (req: Express.Request, file: Express.Multer.File, cb: multer.
 const upload = multer({ storage, fileFilter });
 
 export default upload;
-

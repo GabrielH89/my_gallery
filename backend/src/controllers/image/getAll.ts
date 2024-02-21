@@ -17,7 +17,7 @@ export const getAll = async (req: Request, res: Response) => {
                 return res.status(404).json({ msg: "Não há imagens associadas a este usuário" });
             }
 
-            res.status(200).json({ msg: images });
+            res.status(200).json(images);
         });
     } catch (error) {
         console.error('Error:', error);
