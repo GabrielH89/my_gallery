@@ -2,6 +2,8 @@ import { Request, Response } from 'express';
 import httpStatus from '../../shared/httpStatus';
 import { Image } from '../../models/image';
 import authAuthentication from '../../middleware/authAuthentication';
+import path from 'path';
+import fs from 'fs';
 
 export const deleteById = async (req: Request, res: Response) => {
     try{
@@ -18,6 +20,12 @@ export const deleteById = async (req: Request, res: Response) => {
 
             if(!image){
                 return res.status(404).json({ msg: 'Imagem não encontrada' });
+            }
+
+            const imagePath = path.join(__dirname, `../../../public/uploads/${image.photo}`);
+
+            if(fs.existsSync(imagePath)){
+                fs.unlinkSync(imagePath);
             }
 
             await Image.destroy({where: {id_image}});
