@@ -40,10 +40,31 @@ body {
     cursor: pointer;
     border: 2px solid black; 
     transform: scale(1.1); /* Aumenta o tamanho da imagem em 10% */
-    transition: transform 0.2s ease; 
+    transition: transform 0.2s ease;
+    opacity: 0.3; 
+}
+
+.image-container {
+    position: relative;
+    display: flex;
+    justify-content: center; /* Alinha horizontalmente o conteúdo */
+    align-items: center; /* Alinha verticalmente o conteúdo */
+    width: 100%; /* Garante que o contêiner ocupe todo o espaço disponível */
+    height: 100%; /* Garante que o contêiner ocupe todo o espaço disponível */
 }
 
 .image-description {
-    font-size: 1rem;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.7); /* Cor de fundo da descrição */
+    color: white; /* Cor do texto da descrição */
+    padding: 10px; /* Espaçamento interno da descrição */
+    border-radius: 5px; /* Borda arredondada da descrição */
+    font-size: 1rem; /* Tamanho da fonte da descrição */
+    pointer-events: none; /* A descrição não deve receber eventos de mouse */
+    opacity: 0; /* Inicialmente, a descrição está invisível */
+    transition: opacity 0.3s ease; /* Transição suave da opacidade */
 }
 
+.image-container:hover .image-description {
+    opacity: 1; /* Quando o contêiner da imagem for hover, a descrição se tornará visível */
+}

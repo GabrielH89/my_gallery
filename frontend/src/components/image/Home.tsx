@@ -57,8 +57,14 @@ function Home() {
                 {images.map((image: Image, index: number) => (
                     <div className="image-item" key={index}>
                         <h2 className="image-title">{image.title}</h2>
-                        <img src={`http://localhost:4000/uploads/${image.photo}`} alt='image' className="image-photo"/>
-                        <p className="image-description">{image.description}</p>
+                        <div className="image-container">
+                            <img 
+                                src={`http://localhost:4000/uploads/${image.photo}`} 
+                                alt='image' 
+                                className="image-photo"
+                            />
+                            <div className="image-description">{image.description}</div>
+                        </div>
                     </div>
                 ))}
             </div>

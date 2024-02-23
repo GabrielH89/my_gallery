@@ -17,6 +17,7 @@ router.delete("/gallery", authAuthentication, imageController.deleteAllByUser);
 router.post("/gallery/search", authAuthentication, imageController.searchImageByTitle);
 router.get("/gallery/:id_image", authAuthentication, imageController.getById);
 router.delete("/gallery/:id_image", authAuthentication, imageController.deleteById);
+router.put("/gallery/:id_image", authAuthentication, imageController.updateById);
 
 export default router;
 
