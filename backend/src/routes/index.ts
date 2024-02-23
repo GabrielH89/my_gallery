@@ -7,6 +7,8 @@ const router = express.Router();
 //Routes for user
 router.post("/signUp", userController.signUp);
 router.post("/signIn", userController.signIn);
+//router.get("/user/:id_user", authAuthentication, userController.getUser);
+router.get("/user", authAuthentication, userController.getUser);
 
 //Routes for image
 router.post("/gallery", authAuthentication, imageController.create);

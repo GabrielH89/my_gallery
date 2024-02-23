@@ -1,0 +1,49 @@
+body {
+    background-color: #DCDCDC;
+}
+
+.menu {
+    background-color: #4682B4;
+    width: 100%;
+    height: 100px;
+    color: white;
+    display: flex;
+    align-items: center;
+}
+
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.image-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.image-title {
+    font-size: 2rem;
+}
+
+.image-photo {
+    width: 300px; /* Definindo um tamanho fixo de 300px para todas as imagens */
+    height: 340px; /* Definindo um tamanho fixo de 300px para todas as imagens */
+    object-fit: cover; /* Mantém a proporção e preenche a área da imagem */
+    border-radius: 10px;
+}
+
+.image-photo:hover {
+    cursor: pointer;
+    border: 2px solid black; 
+    transform: scale(1.1); /* Aumenta o tamanho da imagem em 10% */
+    transition: transform 0.2s ease; 
+}
+
+.image-description {
+    font-size: 1rem;
+}
+
