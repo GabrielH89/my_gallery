@@ -20,8 +20,7 @@ export const getById = async (req: Request, res: Response) => {
                 return res.status(404).json({ msg: 'Imagem não encontrada' });
             }
 
-            await Image.destroy({where: {userId}});
-            return res.status(200).json({ msg: image });
+            return res.status(200).json(image);
         });
     } catch (error) {
         console.error('Error:', error);

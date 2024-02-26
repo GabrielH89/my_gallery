@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import axios from 'axios';
 import '../../styles/Home.css';
+import { Link } from "react-router-dom";
 
 interface Image {
+    id_image: number;
     description: string;
     title: string;
     photo: string; // Use photo em vez de imageUrl
@@ -64,6 +66,11 @@ function Home() {
                                 className="image-photo"
                             />
                             <div className="image-description">{image.description}</div>
+                        </div>
+                        <div className="button-container">
+                            <Link to={`/updateImage/${image.id_image}`} className="edit-button"><button >Editar</button></Link>
+                           
+                            <button className="delete-button">Excluir</button>
                         </div>
                     </div>
                 ))}
