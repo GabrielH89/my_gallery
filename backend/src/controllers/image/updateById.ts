@@ -11,7 +11,6 @@ export const updateById = async (req: Request, res: Response) => {
         authAuthentication(req, res, async () => {
             const userId = req.id_user;
             const id_image = req.params.id_image;
-            const { title, description } = req.body;
             let photo: string | undefined;
 
             // Verifica se a imagem com o ID especificado existe no banco de dados
@@ -35,7 +34,15 @@ export const updateById = async (req: Request, res: Response) => {
                     }
 
                     if (!req.file) {
-                        return res.status(400).json({ error: 'No file uploaded' });
+                        return res.status(400).json({ error: 'Nenhuma imagem carregada' });
+                    }
+
+                    if(!title || !description) {
+                        return res.status(400).json({msg: "Preencha todos os campos"})
+                    }
+                    
+                    if(title.length > 35 || description.length > 255) {
+                        return res.status(400).json({msg: "Caracteres maiores que os permitidos"});
                     }
 
                     photo = req.file.filename;

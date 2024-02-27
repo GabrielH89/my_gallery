@@ -1,7 +1,6 @@
 // authAuthentication.ts
 import { Request, Response, NextFunction } from 'express';
 import jwt, { JwtPayload, Secret } from 'jsonwebtoken';
-import httpStatus from '../shared/httpStatus';
 
 // Estendendo a interface Request do Express para incluir a propriedade id_user
 declare global {

@@ -52,14 +52,26 @@ function UpdateImage() {
   const updateImage = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      if(imageTitle.trim().length > 0 && imageDescription.trim().length > 0) {
+      if (imageTitle.trim().length > 0 && imageDescription.trim().length > 0) {
+        if (imageTitle.length > 35) {
+          alert("O título deve ter no máximo 35 caracteres.");
+          return;
+        }
+  
+        if (imageDescription.length > 255) {
+          alert("A descrição deve ter no máximo 255 caracteres.");
+          return;
+        }
+  
         const formData = new FormData();
         formData.append("title", imageTitle);
-        if(selectedFile !== null){ 
+  
+        if (selectedFile !== null) {
           formData.append("photo", selectedFile);
-        }else{
+        } else {
           formData.append("photo", imagePhoto);
         }
+  
         formData.append("description", imageDescription);
         const token = localStorage.getItem('token');
         await axios.put(`http://localhost:4000/gallery/${id_image}`, formData, {

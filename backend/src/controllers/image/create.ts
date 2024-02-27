@@ -19,24 +19,28 @@ export const create = async (req: Request, res: Response) => {
                     }
 
                     if (!req.file) {
-                        return res.status(400).json({ error: 'No file uploaded' });
+                        return res.status(400).json({ error: 'Nenhuma foto carregada' });
                     }
 
                     const { title, description } = req.body;
                     const photo: string = req.file.filename;
-                    const userId = req.id_user; // Obtém o id_user do middleware de autenticação
-                    
+                    // Obtém o id_user do middleware de autenticação
+                    const userId = req.id_user; 
+
                     if(!title || !photo || !description){
                         return res.status(400).json({msg: "Preencha todos os campos"});
                     }
                     // Construir a URL completa da imagem
+
+                    if(title.length > 35 || description.length > 255) {
+                        return res.status(400).json({msg: "Caracteres maiores que os permitidos"});
+                    }
+                    
+                    console.log("Title length: ", title.length);
                     const imageUrl = `${req.protocol}://${req.get("host")}/uploads/${req.file.filename}`;
 
                     const newImage = await Image.create({
-                        title,
-                        description,
-                        photo,
-                        userId,
+                        title, description, photo, userId,
                     });
 
                     res.status(201).json({ message: 'Image criada com sucesso', newImage });
