@@ -50,6 +50,24 @@ function Home() {
         fetchData();
     }, []);
 
+    const deleteData = async (id_image: number) => {
+        try {
+            // Mostrar uma janela de confirmação antes de excluir
+            const confirmDelete = window.confirm("Tem certeza de que deseja excluir esta imagem?");
+            if (confirmDelete) {
+                const token = localStorage.getItem('token');
+                await axios.delete(`http://localhost:4000/gallery/${id_image}`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                setImages(images.filter(image => image.id_image !== id_image));
+            }
+        } catch (error) {
+            console.log("Error: " + error);
+        }
+    }
+
     return (
         <div>
             <div className="menu">
@@ -68,9 +86,13 @@ function Home() {
                             <div className="image-description">{image.description}</div>
                         </div>
                         <div className="button-container">
-                            <Link to={`/updateImage/${image.id_image}`} className="edit-button"><button >Editar</button></Link>
+                            <Link to={`/updateImage/${image.id_image}`} className="edit-button">
+                                <button >Editar</button>
+                            </Link>
                            
-                            <button className="delete-button">Excluir</button>
+                            <button className="delete-button"
+                            onClick={() => deleteData(image.id_image)}
+                            >Excluir</button>
                         </div>
                     </div>
                 ))}
