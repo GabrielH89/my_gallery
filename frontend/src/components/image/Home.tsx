@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from 'axios';
 import '../../styles/Home.css';
 import { Link } from "react-router-dom";
+import { mdiAccount } from "@mdi/js";
 
 interface Image {
     id_image: number;
@@ -10,13 +11,9 @@ interface Image {
     photo: string; // Use photo em vez de imageUrl
 }
 
-interface User {
-    name: string;
-}
 
 function Home() {
     const [images, setImages] = useState<Image[]>([]);
-    const [userName, setUserName] = useState<string>('');
 
     useEffect(() => {
         const fetchData = async () => {
@@ -32,16 +29,7 @@ function Home() {
                 setImages(imagesResponse.data);
 
                 // Requisição para obter os detalhes do usuário
-                const userResponse = await axios.get<User[]>("http://localhost:4000/user", {
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    }
-                });
-                if (userResponse.data.length > 0) {
-                    setUserName(userResponse.data[0].name); // Acessa o campo 'name' do primeiro elemento do array
-                } else {
-                    console.log("Nenhum usuário encontrado");
-                }
+                
             } catch (error) {
                 console.log("Error: " + error);
             }
@@ -70,8 +58,22 @@ function Home() {
 
     return (
         <div>
-            <div className="menu">
-                <h1>Welcome, {userName}</h1>
+             <div className="menu">
+                <h1>Bem-vindo(a)</h1>
+                <div className="menu-buttons">
+                    <button className="add-button">Adicionar Fotos</button>
+                    <button className="delete-all-button">Excluir Todas as Fotos</button>
+                </div>
+                <div className="menu-profile">
+                    <Link to="/personalProfile" >        
+                    <span className="menu-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d={mdiAccount} />
+                        </svg>
+                    </span>
+                    </Link>
+                    <span className="menu-description">Seu perfil</span>
+                </div>
             </div>
             <div className="image-grid">
                 {images.map((image: Image, index: number) => (

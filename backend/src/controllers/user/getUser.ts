@@ -12,7 +12,7 @@ export const getUser = async (req: Request, res: Response) => {
                 return res.status(400).json({ msg: "Parâmetro userId não fornecido" });
             }
 
-            const user = await User.findAll({ where: { id_user: userId } });
+            const user = await User.findOne({ where: { id_user: userId } });
 
             if (!user) {
                 return res.status(404).json({ msg: "Usuário não encontrado" });

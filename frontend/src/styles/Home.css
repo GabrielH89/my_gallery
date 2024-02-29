@@ -9,6 +9,42 @@ body {
     color: white;
     display: flex;
     align-items: center;
+    justify-content: space-between;
+}
+
+.menu-buttons {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap; /* Permite que os botões quebrem para a próxima linha quando não houver espaço suficiente */
+    justify-content: center; /* Alinha os botões horizontalmente */
+}
+
+.add-button,
+.delete-all-button {
+    width: 150px; /* Define um tamanho padrão para os botões */
+    margin: 5px; /* Adiciona um espaço entre os botões */
+}
+
+
+.menu-profile {
+    display: flex; /* Define um layout flexível */
+    flex-direction: column; /* Empilha os itens verticalmente */
+    align-items: center; /* Alinha os itens horizontalmente */
+}
+
+
+.menu-icon svg {
+    width: 4.5em; /* Define a largura do ícone em relação ao tamanho do texto */
+    height: auto; /* Altura automática para manter a proporção */
+    margin-right: 10px; /* Adiciona uma margem à direita para separar o ícone dos botões */
+    cursor: pointer;
+    background-color: white;
+    border-radius: 50%;
+}
+
+.menu-description {
+    font-size: 1.1rem; /* Tamanho da fonte */
+    color: #ffffff; /* Cor do texto */
 }
 
 .image-grid {
@@ -88,3 +124,16 @@ body {
     width: 130px;
     margin: 0 5px; /* Adicione um espaço entre os botões */
 }
+
+.delete-button {
+    background-color: red;
+}
+
+@media screen and (max-width: 600px) {
+    .add-button,
+    .delete-all-button {
+        width: 100%; /* Define a largura total para os botões */
+    }
+}
+
+
