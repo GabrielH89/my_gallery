@@ -11,3 +11,8 @@ label {
 #email {
     width: 70%;
 }
+
+button {
+    margin-top: 30px;
+    width: 30%;   
+}

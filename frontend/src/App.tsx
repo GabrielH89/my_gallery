@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route} from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import SignIn from './components/user/SignIn';
 import Home from './components/image/Home';
 import UpdateImage from './components/image/UpdateImage';
@@ -6,7 +6,6 @@ import PersonalProfile from './components/user/PersonalProfile';
 import SignUp from './components/user/SignUp';
 
 function App() {
-
   return (
     <>
      <BrowserRouter>
@@ -19,7 +18,7 @@ function App() {
       </Routes>
      </BrowserRouter>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
