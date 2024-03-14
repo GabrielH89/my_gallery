@@ -90,13 +90,31 @@ function Home() {
         }
     }
 
+    const deleteAll = async () => {
+        try {
+            // Mostrar uma janela de confirmação antes de excluir todas as imagens
+            const confirmDeleteAll = window.confirm("Tem certeza de que deseja excluir todas as imagens?");
+            if (confirmDeleteAll) {
+                const token = localStorage.getItem('token');
+                await axios.delete("http://localhost:4000/gallery", {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+                setImages([]);
+            }
+        } catch (error) {
+            console.log("Error: " + error);
+        }
+    }
+
     return (
         <div>
              <div className="menu">
                 <h1>Bem-vindo(a)</h1>
                 <div className="menu-buttons">
                     <button className="add-button" onClick={openModal}>Adicionar Fotos</button>
-                    <button className="delete-all-button">Excluir Todas as Fotos</button>
+                    <button className="delete-all-button" onClick={deleteAll}>Excluir Todas as Fotos</button>
                 </div>
                 <div className="menu-profile">
                     <Link to="/personalProfile" >        
