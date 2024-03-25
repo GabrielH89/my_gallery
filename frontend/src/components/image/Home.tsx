@@ -114,7 +114,7 @@ function Home() {
                 <h1>Bem-vindo(a)</h1>
                 <div className="menu-buttons">
                     <button className="add-button" onClick={openModal}>Adicionar Fotos</button>
-                    <button className="delete-all-button" onClick={deleteAll}>Excluir Todas as Fotos</button>
+                    <button className="delete-all-button" onClick={deleteAll}>Excluir Fotos</button>
                 </div>
                 <div className="menu-profile">
                     <Link to="/personalProfile" >        
@@ -169,8 +169,8 @@ function Home() {
                             <div className="image-description">{image.description}</div>
                         </div>
                         <div className="button-container">
-                            <Link to={`/updateImage/${image.id_image}`} className="edit-button">
-                                <button >Editar</button>
+                            <Link to={`/updateImage/${image.id_image}`}>
+                                <button className="edit-button">Editar</button>
                             </Link>
                            
                             <button className="delete-button"

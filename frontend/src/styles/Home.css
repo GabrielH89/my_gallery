@@ -124,6 +124,10 @@ body {
     margin: 0 5px; /* Adicione um espaço entre os botões */
 }
 
+.edit-button {
+    background-color: #4682B4;
+}
+
 .delete-button {
     background-color: red;
 }
