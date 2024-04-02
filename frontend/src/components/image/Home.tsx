@@ -64,7 +64,6 @@ function Home() {
 
             // Atualize o estado images com a nova imagem
             setImages([...images, response.data]);
-
             closeModal();
         } catch (error) {
             console.log("Error: " + error);

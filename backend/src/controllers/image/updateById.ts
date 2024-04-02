@@ -29,31 +29,30 @@ export const updateById = async (req: Request, res: Response) => {
             upload.single('photo')(req, res, async (err: any) => {
                 try {
                     const { title, description } = req.body;
+
                     if (err) {
                         return res.status(400).json({ error: err.message });
                     }
 
+                    if (!title || !description) {
+                        return res.status(400).json({ msg: "Preencha todos os campos" });
+                    }
+
+                    if (title.length > 35 || description.length > 255) {
+                        return res.status(400).json({ msg: "Caracteres maiores que os permitidos" });
+                    }
+
+                    // Se não houver um arquivo enviado, mantenha a foto atual
                     if (!req.file) {
-                        return res.status(400).json({ error: 'Nenhuma imagem carregada' });
-                    }
+                        photo = image.photo;
+                    } else {
+                        photo = req.file.filename;
 
-                    if(!title || !description) {
-                        return res.status(400).json({msg: "Preencha todos os campos"})
-                    }
-                    
-                    if(title.length > 35 || description.length > 255) {
-                        return res.status(400).json({msg: "Caracteres maiores que os permitidos"});
-                    }
-
-                    photo = req.file.filename;
-
-                    //pega o arquivo antigo
-                    const oldImagePath = path.join(__dirname, `../../../public/uploads/${image.photo}`);
-
-                    // Verifica se o arquivo antigo existe antes de excluí-lo
-                    if (fs.existsSync(oldImagePath)) {
-                        // Exclui o arquivo antigo
-                        fs.unlinkSync(oldImagePath);
+                        // Remove o arquivo antigo
+                        const oldImagePath = path.join(__dirname, `../../../public/uploads/${image.photo}`);
+                        if (fs.existsSync(oldImagePath)) {
+                            fs.unlinkSync(oldImagePath);
+                        }
                     }
 
                     // Atualiza os campos da imagem no banco de dados
@@ -71,3 +70,4 @@ export const updateById = async (req: Request, res: Response) => {
         res.status(500).json({ msg: httpStatus[500] });
     }
 }
+

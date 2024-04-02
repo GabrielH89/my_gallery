@@ -28,7 +28,8 @@ const SignInPage: React.FC = () => {
             }
             
         }catch(error){
-            if((error as AxiosError).response && (error as AxiosError).response?.status === 404) {
+            if((error as AxiosError).response && (error as AxiosError).response?.status === 400 || 
+            (error as AxiosError).response && (error as AxiosError).response?.status) {
                 alert("Email ou senha inválidos");
             }else{
                 console.log("Error: " + error);
@@ -58,7 +59,9 @@ const SignInPage: React.FC = () => {
                 required
             />
             </div>
-            <button type="submit" onClick={handleSignIn}>login</button>
+            <div className='login-btn'>
+                <button type="submit" onClick={handleSignIn}>Login</button>
+            </div>
             <p>Não possui uma conta? <Link to="signUp">Cadastre-se</Link></p>
         </form>
         </div>
