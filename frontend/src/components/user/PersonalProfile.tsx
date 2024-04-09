@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 function PersonalProfile() {
     const [userName, setUserName] = useState("");
     const [userEmail, setUserEmail] = useState("");
+    const [isAccountDeleted, setIsAccountDeleted] = useState(false); // Estado para controlar se a conta foi deletada
     const navigate = useNavigate(); 
 
     useEffect(() => {
@@ -18,10 +19,8 @@ function PersonalProfile() {
                     }
                 });
                 const user = response.data;
-                console.log(user);
                 setUserName(user.name || "");
-                setUserEmail(user.email || ""); // Definindo o email do usuário no estado
-               
+                setUserEmail(user.email || "");
             } catch (error) {
                 console.log("Error: ", error);
             }
@@ -34,6 +33,32 @@ function PersonalProfile() {
         navigate("/");
     }
 
+    const deleteAccount = async () => {
+        const confirmDelete = window.confirm("Tem certeza que deseja excluir sua conta? ");
+        if(confirmDelete){
+            try {
+                const token = localStorage.getItem('token');
+                await axios.delete(`http://localhost:4000/user`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+                setIsAccountDeleted(true); // Define o estado para indicar que a conta foi deletada com sucesso
+            } catch (error) {
+                console.log("Error: ", error);
+            }
+        }
+    }
+
+    // Verifica se a conta foi deletada com sucesso e redireciona para a rota raiz
+    useEffect(() => {
+        if (isAccountDeleted) {
+            alert("Sua conta foi deletada com sucesso");
+            localStorage.removeItem('token'); // Remover o token após a exclusão da conta
+            navigate("/"); // Redirecionar para a rota raiz após a exclusão da conta
+        }
+    }, [isAccountDeleted, navigate]);
+
     return (
         <div>
             <h2>Informações pessoais</h2>
@@ -44,7 +69,8 @@ function PersonalProfile() {
                 <label htmlFor="email">Email:</label>
                 <input type="email" id="email" value={userEmail} readOnly />
 
-                <button onClick={logout}>Sair da conta</button>
+                <button onClick={logout} className="btn-logout">Sair da conta</button>
+                <button onClick={deleteAccount} className="btn-deletar">Deletar conta</button>
             </form>
         </div>
     );
