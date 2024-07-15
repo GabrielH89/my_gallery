@@ -3,6 +3,7 @@ import axios from 'axios';
 import '../../styles/Home.css';
 import { Link } from "react-router-dom";
 import { mdiAccount } from "@mdi/js";
+import { useUserData } from "../../utils/useUserData";
 
 interface Image {
     id_image: number;
@@ -17,6 +18,8 @@ function Home() {
     const [imageTitle, setImageTitle] = useState("");
     const [imagePhoto, setImagePhoto] = useState<File | string>("");
     const [imageDescription, setImageDescription] = useState("");
+    //const [userName, setUserName] = useState("");
+    const {userName} = useUserData();
 
     const openModal = () => {
         setModalOpen(true);
@@ -65,6 +68,9 @@ function Home() {
             // Atualize o estado images com a nova imagem
             setImages([...images, response.data]);
             closeModal();
+            setImageTitle("");
+            setImagePhoto("");
+            setImageDescription("");
         } catch (error) {
             console.log("Error: " + error);
         }
@@ -107,10 +113,28 @@ function Home() {
         }
     }
 
+    /*useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const token = localStorage.getItem('token');
+                const response = await axios.get("http://localhost:4000/user", {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                const user = response.data;
+                setUserName(user.name || "");
+            } catch (error) {
+                console.log("Error: ", error);
+            }
+        };
+        fetchData();
+    }, []);*/
+
     return (
         <div>
              <div className="menu">
-                <h1>Bem-vindo(a)</h1>
+                <h1>Bem-vindo(a), {userName}</h1>
                 <div className="menu-buttons">
                     <button className="add-button" onClick={openModal}>Adicionar Fotos</button>
                     <button className="delete-all-button" onClick={deleteAll}>Excluir Fotos</button>

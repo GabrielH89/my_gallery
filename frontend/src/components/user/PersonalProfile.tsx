@@ -2,31 +2,13 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import "../../styles/personalProfile.css";
 import { useNavigate } from "react-router-dom";
+import { useUserData } from "../../utils/useUserData";
 
 function PersonalProfile() {
-    const [userName, setUserName] = useState("");
-    const [userEmail, setUserEmail] = useState("");
+   
     const [isAccountDeleted, setIsAccountDeleted] = useState(false); // Estado para controlar se a conta foi deletada
     const navigate = useNavigate(); 
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const token = localStorage.getItem('token');
-                const response = await axios.get("http://localhost:4000/user", {
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    }
-                });
-                const user = response.data;
-                setUserName(user.name || "");
-                setUserEmail(user.email || "");
-            } catch (error) {
-                console.log("Error: ", error);
-            }
-        };
-        fetchData();
-    }, []);
+    const {userName, userEmail} = useUserData();
 
     const logout = () => {
         localStorage.removeItem('token');
