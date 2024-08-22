@@ -26,9 +26,8 @@ export const signUp = async (req: Request, res: Response) => {
                 name, email, password: hashedPassword
             })
 
-            res.status(201).json({msg: httpStatus[201], newUser});
+            res.status(201).json({msg: "User created with success"});
         } 
-
         
     }catch(err) {
         console.log("Ocurred this error: " + err);

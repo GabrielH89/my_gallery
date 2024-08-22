@@ -5,8 +5,8 @@ import authAuthentication from "../middleware/authAuthentication";
 const router = express.Router();
 
 //Routes for user
-router.post("/signUp", userController.signUp);
-router.post("/signIn", userController.signIn);
+router.post("/signup", userController.signUp);
+router.post("/signin", userController.signIn);
 //router.get("/user/:id_user", authAuthentication, userController.getUser);
 router.get("/user", authAuthentication, userController.getUser);
 router.delete("/user", authAuthentication, userController.deleteById);
