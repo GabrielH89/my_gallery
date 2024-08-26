@@ -107,9 +107,9 @@
     "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
   },
   "exclude": [
-    "./jest.config.ts",
+    "./jest.config.js",
     "./node_modules",
     "./tests",
-    "./build"
+    "./dist"
   ],
 }

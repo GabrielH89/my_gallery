@@ -145,10 +145,15 @@ const config = {
   // snapshotSerializers: [],
 
   // The test environment that will be used for testing
-  // testEnvironment: "jest-environment-node",
+  testEnvironment: "jest-environment-node",
 
   // Options that will be passed to the testEnvironment
-  // testEnvironmentOptions: {},
+  testEnvironmentOptions: {
+    // Adicione qualquer opção que desejar aqui
+    // Exemplo:
+    // url: "http://localhost",
+    // userAgent: "Agent/007"
+  },
 
   // Adds a location field to test results
   // testLocationInResults: false,
@@ -171,7 +176,7 @@ const config = {
   // testResultsProcessor: undefined,
 
   // This option allows use of a custom test runner
-  // testRunner: "jest-circus/runner",
+  testRunner: "jest-circus/runner",
 
   // A map from regular expressions to paths to transformers
   // transform: undefined,
@@ -192,7 +197,7 @@ const config = {
   // watchPathIgnorePatterns: [],
 
   // Whether to use watchman for file crawling
-  // watchman: true,
+  watchman: true,
 };
 
 module.exports = config;
