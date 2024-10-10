@@ -2,7 +2,7 @@
 
 ## Projeto para salvar imagens na galeria
 ![GitHub repo size](https://img.shields.io/github/repo-size/GabrielH89/my_gallery)
-![GitHub language count](https://img.shields.io/github/languages/count/GabrielH89/crud_users)
+![GitHub language count](https://img.shields.io/github/languages/count/GabrielH89/my_gallery)
 
 ![project_image](https://github.com/GabrielH89/my_gallery/assets/67241633/076b0588-58ea-497d-b900-9bbb2cf2fc87)
 
