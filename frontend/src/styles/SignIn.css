@@ -5,10 +5,11 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
+  background-color: #2C3E50;
 }
   
 .signInForm {
-  width: 300px;
+  width: 400px;
   padding: 20px;
   background-color: #f0f0f0;
   border-radius: 5px;
@@ -55,6 +56,6 @@ button:hover {
 /* Estilo responsivo para telas menores */
 @media screen and (max-width: 600px) {
     .signInForm {
-        width: 90%;
+        width: 50%;
     }
 }

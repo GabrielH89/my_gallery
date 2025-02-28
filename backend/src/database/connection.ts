@@ -2,7 +2,7 @@ import { Sequelize } from "sequelize";
 
 
 const connection = new Sequelize({
-    database: process.env.DB_DATABASE_TEST,
+    database: process.env.DB_DATABASE,
     dialect: "mysql",
     username: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,

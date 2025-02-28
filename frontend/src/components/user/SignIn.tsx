@@ -9,6 +9,8 @@ import { Link } from 'react-router-dom';
 const SignInPage: React.FC = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
+
     const navigate = useNavigate();
     
     const handleSignIn = async (e: { preventDefault: () => void; }) => {
@@ -24,13 +26,19 @@ const SignInPage: React.FC = () => {
                 localStorage.setItem('token', token);
                 navigate("/home");
             }else{
-                alert("Preencha os campos");
+                setErrorMessage("Preencha os campos!");
+                setTimeout(() => {
+                    setErrorMessage("");
+                }, 3000);
             }
             
         }catch(error){
             if((error as AxiosError).response && (error as AxiosError).response?.status === 400 || 
             (error as AxiosError).response && (error as AxiosError).response?.status) {
-                alert("Email ou senha inválidos");
+                setErrorMessage("Email ou senha inválidos");
+                setTimeout(() => {
+                    setErrorMessage("");
+                }, 5000);
             }else{
                 console.log("Error: " + error);
             }  
@@ -39,7 +47,11 @@ const SignInPage: React.FC = () => {
         
     return (
         <div className="signInContainer">
-        <form className="signInForm">
+        <form className="signInForm" onSubmit={handleSignIn}>
+            {errorMessage && 
+                <div className="error-message" style={{ backgroundColor: '#B22222', color: 'white', 
+                padding: '10px', marginBottom: '10px', borderRadius: '5px', textAlign: 'center', fontSize: '1.1rem' }}>
+            {errorMessage}</div>}
             <h2>Login</h2>
             <div className="formGroup">
             <label>Email:</label>
