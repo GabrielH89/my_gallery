@@ -1,36 +1,79 @@
-/* SignInPage.css */
-
 .signInContainer {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #2C3E50;
+  width: 100%;
+  background-color: #F9FAFB;
 }
-  
+
 .signInForm {
   width: 400px;
   padding: 20px;
-  background-color: #f0f0f0;
+  background-color: #FFFFFF;
   border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  color: #111827;
 }
 
-.formGroup {
+.signInForm h2 {
+  display: flex;
+  justify-content: center;
+  color: #111827;
+}
+
+.error-message {
+  background-color: #B22222;
+  color: white;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+.signInForm .formGroup {
   margin-bottom: 15px;
 }
 
-label {
+.signInForm label {
   display: block;
   margin-bottom: 5px;
+  color: #4B5563;
 }
 
-input[type='email'],
-input[type='password'] {
-    width: calc(100% - 16px); /* Leva em consideração o padding (8px) do elemento */
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
+.signInForm input[type='email'],
+.signInForm input[type='password'],
+.signInForm input[type='text'] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #D1D5DB;
+  border-radius: 3px;
+  height: 24px;
+  font-size: 1.1rem;
+  color: #374151;
+  background-color: #F9FAFB;
+}
+
+.password-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-wrapper input {
+  width: 100%;
+  padding-right: 40px; /* espaço pro botão */
+}
+
+.toggle-password {
+  position: absolute;
+  background: transparent;
+  right: -30px;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: black;
 }
 
 .login-btn {
@@ -38,10 +81,10 @@ input[type='password'] {
   justify-content: center;
 }
 
-button {
-  width: calc(100% - 16px); /* Leva em consideração o padding (8px) do elemento */
-  padding: 10px;
-  background-color: #007bff;
+.signInForm button[type="submit"] {
+  width: calc(100% - 16px);
+  padding: 14px;
+  background-color: #2563EB;
   color: #fff;
   border: none;
   border-radius: 3px;
@@ -49,13 +92,12 @@ button {
   font-size: 1rem;
 }
 
-button:hover {
-  background-color: #000080;
+.signInForm button[type="submit"]:hover {
+  background-color: #1D4ED8;
 }
 
-/* Estilo responsivo para telas menores */
 @media screen and (max-width: 600px) {
-    .signInForm {
-        width: 50%;
-    }
+  .signInForm {
+    width: 70%;
+  }
 }
