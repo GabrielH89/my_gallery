@@ -9,6 +9,8 @@ function SignUp() {
     const [confirmPassword, setConfirmPassword] = useState("");
 
     const navigate = useNavigate();
+    const API_URL = import.meta.env.VITE_API_URL;
+
     const cadastrarUser = async (e: React.FormEvent) => {
         try{
             e.preventDefault();
@@ -25,7 +27,7 @@ function SignUp() {
             }else if(password !== confirmPassword) {
                 alert("O campo senha e o confirmação de senha não correspondem");
             }else{
-                await axios.post("http://localhost:4000/signUp", formData, {
+                await axios.post(`${API_URL}/signup`, formData, {
                     headers: {
                         "Content-Type": "application/json",
                     }

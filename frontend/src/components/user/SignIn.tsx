@@ -12,15 +12,16 @@ const SignInPage: React.FC = () => {
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
 
+    const API_URL = import.meta.env.VITE_API_URL;
+
     const handleSignIn = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
         try {
             if (email.trim().length > 0 && password.trim().length > 0) {
-                const response = await axios.post("http://localhost:4000/signIn", {
+                const response = await axios.post(`${API_URL}/signin`, {
                     email: email,
                     password: password
                 });
-                console.log("Response ", response.data);
                 const token = response.data.token;
                 localStorage.setItem('token', token);
                 navigate("/home");

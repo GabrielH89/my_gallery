@@ -20,6 +20,7 @@ function Home() {
     const [imageDescription, setImageDescription] = useState("");
     //const [userName, setUserName] = useState("");
     const {userName} = useUserData();
+    const API_URL = import.meta.env.VITE_API_URL;
 
     const openModal = () => {
         setModalOpen(true);
@@ -35,7 +36,7 @@ function Home() {
                 const token = localStorage.getItem('token');
 
                 // Requisição para obter as imagens
-                const imagesResponse = await axios.get<Image[]>("http://localhost:4000/gallery", {
+                const imagesResponse = await axios.get<Image[]>(`${API_URL}/gallery`, {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
@@ -58,7 +59,7 @@ function Home() {
             formData.append('photo', imagePhoto);
             formData.append('description', imageDescription);
             
-            const response = await axios.post('http://localhost:4000/gallery', formData, {
+            const response = await axios.post(`${API_URL}/gallery`, formData, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'multipart/form-data'
@@ -83,7 +84,7 @@ function Home() {
             const confirmDelete = window.confirm("Tem certeza de que deseja excluir esta imagem?");
             if (confirmDelete) {
                 const token = localStorage.getItem('token');
-                await axios.delete(`http://localhost:4000/gallery/${id_image}`, {
+                await axios.delete(`${API_URL}/gallery/${id_image}`, {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
@@ -101,7 +102,7 @@ function Home() {
             const confirmDeleteAll = window.confirm("Tem certeza de que deseja excluir todas as imagens?");
             if (confirmDeleteAll) {
                 const token = localStorage.getItem('token');
-                await axios.delete("http://localhost:4000/gallery", {
+                await axios.delete(`${API_URL}/gallery`, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
@@ -112,24 +113,6 @@ function Home() {
             console.log("Error: " + error);
         }
     }
-
-    /*useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const token = localStorage.getItem('token');
-                const response = await axios.get("http://localhost:4000/user", {
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    }
-                });
-                const user = response.data;
-                setUserName(user.name || "");
-            } catch (error) {
-                console.log("Error: ", error);
-            }
-        };
-        fetchData();
-    }, []);*/
 
     return (
         <div>
@@ -184,7 +167,7 @@ function Home() {
                         <h2 className="image-title">{image.title}</h2>
                         <div className="image-container">
                             <img 
-                                src={`http://localhost:4000/uploads/${image.photo}`} 
+                                src={`${API_URL}/uploads/${image.photo}`} 
                                 alt='image' 
                                 className="image-photo"
                                 onLoad={() => console.log('Image loaded successfully')}

@@ -9,6 +9,7 @@ function PersonalProfile() {
     const [isAccountDeleted, setIsAccountDeleted] = useState(false); // Estado para controlar se a conta foi deletada
     const navigate = useNavigate(); 
     const {userName, userEmail} = useUserData();
+    const API_URL = import.meta.env.VITE_API_URL;
 
     const logout = () => {
         localStorage.removeItem('token');
@@ -20,7 +21,7 @@ function PersonalProfile() {
         if(confirmDelete){
             try {
                 const token = localStorage.getItem('token');
-                await axios.delete(`http://localhost:4000/user`, {
+                await axios.delete(`${API_URL}/user`, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
