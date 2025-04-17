@@ -1,7 +1,7 @@
 // SignInPage.tsx
 
 import React, { useState } from 'react';
-import '../../styles/SignIn.css';
+import '../../styles/user/SignIn.css';
 import axios, { AxiosError } from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';

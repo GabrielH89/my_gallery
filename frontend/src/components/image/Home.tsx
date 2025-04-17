@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from 'axios';
-import '../../styles/Home.css';
+import '../../styles/image/Home.css';
 import { Link } from "react-router-dom";
 import { mdiAccount } from "@mdi/js";
 import { useUserData } from "../../utils/useUserData";

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useState, useEffect, FormEvent } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import '../../styles/UpdateImage.css';
+import '../../styles/image/UpdateImage.css';
 
 function UpdateImage() {
   const [imageTitle, setImageTitle] = useState("");
@@ -87,7 +87,6 @@ function UpdateImage() {
        // Navegar de volta para a página inicial após a atualização
     } catch (error) {
       console.log("Error: " + error);
-      console.log("Response: ", error.response);
     }
   };
 
