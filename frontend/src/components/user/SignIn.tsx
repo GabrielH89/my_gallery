@@ -4,12 +4,16 @@ import '../../styles/user/SignIn.css';
 import axios, { AxiosError } from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import Modal from './Modal';
+import SignUp from './SignUp';
 
 const SignInPage: React.FC = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const [showPassword, setShowPassword] = useState(false);
+    const [isSignUpOpen, setSignUpOpen] = useState(false);
+
     const navigate = useNavigate();
 
     const API_URL = import.meta.env.VITE_API_URL;
@@ -80,8 +84,14 @@ const SignInPage: React.FC = () => {
                 <div className='login-btn'>
                     <button type="submit">Login</button>
                 </div>
-                <p>Não possui uma conta? <Link to="signUp">Cadastre-se</Link></p>
+                <p>Não possui uma conta?{" "} 
+                    <Link to="#" onClick={() => setSignUpOpen(true)}>Cadastre-se</Link>
+                </p>
             </form>
+
+            <Modal isOpen={isSignUpOpen} onClose={() => setSignUpOpen(false)}>
+                <SignUp/>
+            </Modal>
         </div>
     );
 };
